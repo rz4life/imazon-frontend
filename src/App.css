@@ -12,6 +12,10 @@
   margin: 25px;
   justify-content: center;
 }
+img{
+  width: 200px;
+  height: 200px;
+}
 
 .signuppage{
   border: 2px solid white;
@@ -21,4 +25,16 @@
   flex-direction: column; */
   width: 60%;
   background-color: rgb(231, 224, 224); 
+}
+.product{
+  display: grid;
+}
+.cartproduct{
+  display: flex;
+}
+.cartpage{
+  align-items: center;
+  justify-content: center;
+  display:flex;
+  flex-direction: column;
 }

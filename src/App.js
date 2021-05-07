@@ -12,9 +12,13 @@ import Cart from './componet/pages/cart'
 import UserOrders from './componet/userorders'
 import Useraddress from './componet/useraddress'
 import Userwallet from './componet/userwallet'
+import Singleproduct from './componet/viewsingleproduct'
+import Checkout from './componet/checkout'
 
 function App() {
   const [user, setUser] = useState (null)
+  const [singleproduct, setSingeleproduct] = useState ([])
+  const [cart, setCart] = useState ([])
 
   const getUserInfo = async () =>{
 
@@ -31,12 +35,27 @@ function App() {
   }
   useEffect (() =>{ getUserInfo()}, [])
 
+  const getuserCart= async () =>{
+  
+    const cartId = localStorage.getItem('cartId')
+   try {
+     const cart = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products`)
+     console.log(cart)
+      if(cart.data){
+       setCart(cart.data.products)
+     }
+   }  catch(error){
+     console.log(error)
+   }
+ }
+ useEffect (() =>{ getuserCart()}, [user])
+
   return (
     <div className="App">
       <Navbar user = {user} setUser = {setUser}/>
 
 
-      <Route path = '/' exact render ={ () =>( <Home/>)}/>
+      <Route path = '/' exact render ={ () =>( <Home setSingeleproduct = {setSingeleproduct}/>)}/>
 
 
       <Route path = '/profile'  render ={ () =>{ 
@@ -49,7 +68,7 @@ function App() {
 
       <Route path = '/cart'  render ={ () =>{ 
         if (user){
-          return <Cart user = {user}/>
+          return <Cart user = {user} cart ={cart} setCart = {setCart}/>
         }else{
           return<Redirect to = '/login'/>
         }
@@ -77,7 +96,23 @@ function App() {
         }else{
           return<Redirect to = '/login'/>
         }
-      }}/>   
+      }}/>
+
+      <Route path = '/singleproduct' exact  render ={ () =>{ 
+        if (user){
+          return <Singleproduct cart ={cart} singleproduct = {singleproduct}/>
+        }else{
+          return<Redirect to = '/login'/>
+        }
+      }}/> 
+
+       <Route path = '/checkout' exact  render ={ () =>{ 
+        if (user){
+          return <Checkout />
+        }else{
+          return<Redirect to = '/login'/>
+        }
+      }}/>  
 
 
       <Route path = '/signup'  render ={ () =>{ 
