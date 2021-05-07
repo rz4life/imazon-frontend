@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+  background-color: grey;
+  height: 750px;
+}
+
+.home{
+  background-color: red;
+}
+
+.input{
+  margin: 25px;
+  justify-content: center;
+}
+
+.signuppage{
+  border: 2px solid white;
+  border-radius: 10%;
+  align-items: center;
+  /* display: flex;
+  flex-direction: column; */
+  width: 60%;
+  background-color: rgb(231, 224, 224); 
+}
