@@ -32,7 +32,14 @@ const Singleproduct = (props) =>{
                     {
                          includescart(props.cart, props.singleproduct.id)?
                        
-                        <button>Remove Item from Cart</button>
+                        <button onClick ={() =>{
+                            const cartId = localStorage.getItem('cartId')
+                            console.log(cartId)
+                            axios.delete (`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products/${props.singleproduct.id}`).then((response) =>{
+                                console.log(response)
+                            })
+
+                        }}>Remove Item from Cart</button>
                         :
                         <button onClick = {() =>{
                                         console.log(props.singleproduct.id)
