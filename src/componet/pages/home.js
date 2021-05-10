@@ -23,10 +23,11 @@ const Home = (props) =>{
 
     return(
 
-        
+        <div>
+          <h1>All Products</h1>
             <div className = 'home'>
 
-                <h1> All Products</h1>
+                
                 {
                     products.map((item, i) =>(
                         <div className = 'product' key = {i}>
@@ -47,7 +48,7 @@ const Home = (props) =>{
                 }
                 
              </div>
-
+          </div>
         
         
     )
