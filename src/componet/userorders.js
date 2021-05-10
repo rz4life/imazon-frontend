@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 const UserOrders = () =>{
 
+
     const [allorders, setAllOrders] = useState([])
 
     const getallOrders = () =>{
@@ -20,6 +21,7 @@ const UserOrders = () =>{
     useEffect(getallOrders, [])
 
     return(
+
 
         <div>
 
@@ -43,6 +45,7 @@ const UserOrders = () =>{
             }
            
         </div>
+
     )
 
 }
