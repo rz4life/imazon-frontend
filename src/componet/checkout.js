@@ -3,39 +3,41 @@ import { useEffect, useState } from 'react';
 import { Redirect } from "react-router";
 
 
-const Checkout = (props) =>{
+const Checkout = (props) => {
     const arr = []
-     let totalnumber = 0
-     const[totalValue,setTotalValue] =useState (0)
-     const [order,setOrder] = useState()
+    let totalnumber = 0
+    const [totalValue, setTotalValue] = useState(0)
+    const [order, setOrder] = useState()
 
-    const palceOrder = () =>{
-        const userId = localStorage.getItem('userId') 
+    const [redirect, setRedirect] = useState(false)
+    const palceOrder = () => {
+        const userId = localStorage.getItem('userId')
         const cartId = localStorage.getItem('cartId')
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/orders/${userId}/${cartId}`)
-        .then((response) =>{
-            console.log(response)
-            setOrder(response.data)
-            localStorage.removeItem('cartId')
-        })
-        return<Redirect to = '/login'/>
+            .then((response) => {
+                console.log(response)
+                setOrder(response.data)
+                localStorage.removeItem('cartId')
+                setRedirect(true)
+            })
     }
-    const total = ( ) =>{
+    const total = () => {
 
-        for (let i = 0 ; i < arr.length; i++){
-            
-             totalnumber += Number(arr[i])
+        for (let i = 0; i < arr.length; i++) {
+
+            totalnumber += Number(arr[i])
             console.log(arr)
             console.log(totalValue)
-            
-            
+
+
         }
         setTotalValue(totalnumber)
-    } 
+    }
     useEffect(total, [])
 
-    return(
+    return (
         <div>
+            {redirect ? <Redirect to='/userorders' /> : null}
             <h2>Shipping Information</h2>
             <h5>{props.user.name}</h5>
             <h5>{props.user.email}</h5>
@@ -48,29 +50,29 @@ const Checkout = (props) =>{
             <h5>{props.user.cardNumber}</h5>
             <h5>{props.user.expDate}</h5>
 
-            
+
             <h2>Products Information</h2>
 
             {
-            
-                props.cart.map((item, i) =>(
-                    <div className = 'cartproduct' key = {i}>
 
-                    <h4>{item.name}</h4>
-                    <h4>${item.price}</h4>
-                    <img src = {`images/${item.image}`}/>
-                    {arr.push(item.price)}
+                props.cart.map((item, i) => (
+                    <div className='cartproduct' key={i}>
+
+                        <h4>{item.name}</h4>
+                        <h4>${item.price}</h4>
+                        <img src={`images/${item.image}`} />
+                        {arr.push(item.price)}
                     </div>
                 ))
-                
+
             }
-               
 
-                <h4>Total Amount:- ${totalValue} </h4>
 
-                <button
-                onClick = {palceOrder}
-                 >Place Order</button>
+            <h4>Total Amount:- ${totalValue} </h4>
+
+            <button
+                onClick={palceOrder}
+            >Place Order</button>
 
         </div>
     )
