@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import {useEffect, useState} from 'react'
 
 const Singleproduct = (props) =>{
 
@@ -18,6 +18,9 @@ const Singleproduct = (props) =>{
             return false
         }
     }
+    // useEffect( includescart, [addorremove])
+
+
 
     return(
       
@@ -37,6 +40,8 @@ const Singleproduct = (props) =>{
                             console.log(cartId)
                             axios.delete (`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products/${props.singleproduct.id}`).then((response) =>{
                                 console.log(response)
+                                // window.location.reload()
+                               
                             })
 
                         }}>Remove Item from Cart</button>
@@ -51,6 +56,9 @@ const Singleproduct = (props) =>{
                                            }).then ((response) =>{
                                                console.log(response.data.cart)
                                                localStorage.setItem('cartId', response.data.cart.id)
+                                                // window.location.reload()
+
+                                             
                                            })
                     
                                    }}>Add to Cart</button>
@@ -58,6 +66,7 @@ const Singleproduct = (props) =>{
                     
         </div>
     )
+
 
 }
 

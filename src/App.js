@@ -41,7 +41,7 @@ function App() {
    try {
      const cart = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products`)
      console.log(cart)
-      if(cart.data){
+      if(cart.data.products){
        setCart(cart.data.products)
      }
    }  catch(error){
@@ -108,7 +108,7 @@ function App() {
 
        <Route path = '/checkout' exact  render ={ () =>{ 
         if (user){
-          return <Checkout />
+          return <Checkout cart ={cart} user = {user}/>
         }else{
           return<Redirect to = '/login'/>
         }

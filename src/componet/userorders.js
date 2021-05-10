@@ -1,37 +1,51 @@
-import axios from 'axios'
-import React, { useEffect } from 'react'
+import axios from "axios"
+import { useEffect, useState } from 'react';
+
+const UserOrders = () =>{
 
 
+    const [allorders, setAllOrders] = useState([])
 
-const UserOrders = () => {
+    const getallOrders = () =>{
+        const userId = localStorage.getItem('userId') 
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/orders`, {
+            headers: {Authorization: userId}
+        }).then((response) =>{
+            console.log(response.data.orders)
+            if(response.data.orders){
+                setAllOrders(response.data.orders)
+            }
+        })
+
+    }
+    useEffect(getallOrders, [])
 
     return(
 
-    <div>
-        <h1>Orders</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>ORDER ID</th>
-                        <th>USER</th>
-                        <th>DATE</th>
-                        <th>TOTAL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders.map((order) => (
-                        <tr key={order._id}>
-                            <td>{order._id}</td>
-                            <td>{order.user.name}</td>
-                            <td>{order.createdAt.substring(0, 10)}</td>
-                            <td>{order.totalPrice.toFixed(2)}</td>
-                        
-                            
-                        </tr>
-                    ))}
-                </tbody>
-            </table>        
-    </div>
+
+        <div>
+
+            {
+                allorders.map((items, i) =>(
+
+                    <div className = 'allorders' key = {i}>
+
+                        <h3>{items.cardName}</h3>
+                        <h3>{items.total}</h3>
+                        <h4>Products</h4>
+                        {
+                          items.products.map((products,i) =>(
+                              <div>
+                                 <h6>{products.name}</h6>
+                             </div> 
+                          ))  
+                        }
+                    </div>
+                ))
+            }
+           
+        </div>
+
     )
 
 }
