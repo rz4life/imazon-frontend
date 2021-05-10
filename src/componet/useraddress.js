@@ -20,6 +20,7 @@ const Useraddress = (props) =>{
         })
         .then((response) =>{
             console.log(response)
+            window.location.reload()
         })
         return <Redirect to = '/profile'/>
     }

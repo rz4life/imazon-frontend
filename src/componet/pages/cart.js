@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom'
 const Cart = (props) => {
 
   const [cart, setCart] = useState(props.cart)
-  console.log("CART AT BEGINING: ", cart)
+  
 
   const getuserCart = async () => {
 
@@ -17,7 +17,7 @@ const Cart = (props) => {
       console.log(cart)
       if (cart.data.products) {
         setCart(cart.data.products)
-        console.log("CART AT getcart: ", cart)
+        
 
       }
     } catch (error) {

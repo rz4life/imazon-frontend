@@ -30,13 +30,13 @@ const UserOrders = () =>{
 
                     <div className = 'allorders' key = {i}>
 
-                        <h3>{items.cardName}</h3>
-                        <h3>{items.total}</h3>
+                        <h3>Name:- {items.cardName}</h3>
+                        <h3>Total:- ${items.total}</h3>
                         <h4>Products</h4>
                         {
                           items.products.map((products,i) =>(
                               <div>
-                                 <h6>{products.name}</h6>
+                                 <h6>. {products.name}</h6>
                              </div> 
                           ))  
                         }
