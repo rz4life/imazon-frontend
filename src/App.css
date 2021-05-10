@@ -1,12 +1,51 @@
 .App {
   text-align: center;
-  background-color: grey;
-  height: 750px;
+  background-color:  #0f223a;
+  height: 60px;
+}
+html { 
+  background-color: white;
 }
 
-.home{
-  background-color: red;
+.navbar {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  height: 60px;
+  top: 0;
+  z-index: 100;
 }
+
+.navtext {
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 50px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  right: 2%;
+}
+h1 {
+  display: block;
+  text-align: center;
+}
+.home{
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
+  padding: 10px;
+ }
 
 .input{
   margin: 25px;
@@ -17,18 +56,11 @@ img{
   height: 200px;
 }
 
-.signuppage{
-  border: 2px solid white;
-  border-radius: 10%;
-  align-items: center;
-  /* display: flex;
-  flex-direction: column; */
-  width: 60%;
-  background-color: rgb(231, 224, 224); 
-}
+
 .product{
-  display: grid;
+  /* border: solid black 1px; */
 }
+
 .cartproduct{
   display: flex;
 }
@@ -37,4 +69,15 @@ img{
   justify-content: center;
   display:flex;
   flex-direction: column;
+}
+
+button {
+  display: block;
+  margin: auto;
+  background-color: #0d3567;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 5px;
 }
