@@ -19,6 +19,7 @@ const Userwallet = (props) =>{
         })
         .then((response) =>{
             console.log(response)
+            window.location.reload()
         })
     }
 

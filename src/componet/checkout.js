@@ -39,16 +39,16 @@ const Checkout = (props) => {
         <div>
             {redirect ? <Redirect to='/userorders' /> : null}
             <h2>Shipping Information</h2>
-            <h5>{props.user.name}</h5>
-            <h5>{props.user.email}</h5>
-            <h5>{props.user.userAddress}</h5>
-            <h5>{props.user.userCity}</h5>
-            <h5>{props.user.userZipcode}</h5>
+            <h5>Full Name:- {props.user.name}</h5>
+            <h5>Email:- {props.user.email}</h5>
+            <h5>Address:- {props.user.userAddress}</h5>
+            <h5>City:- {props.user.userCity}</h5>
+            <h5>Zip code:-{props.user.userZipcode}</h5>
 
             <h2>Card Information</h2>
-            <h5>{props.user.cardName}</h5>
-            <h5>{props.user.cardNumber}</h5>
-            <h5>{props.user.expDate}</h5>
+            <h5> Card Name:- {props.user.cardName}</h5>
+            <h5>Card Number:- {props.user.cardNumber}</h5>
+            <h5>Card Exp:- {props.user.expDate}</h5>
 
 
             <h2>Products Information</h2>
