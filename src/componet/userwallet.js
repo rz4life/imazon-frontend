@@ -1,11 +1,26 @@
+import axios from 'axios'
 import { useState} from 'react'
 
 const Userwallet = (props) =>{
 
     const[page, setPage] = useState('firstpage')
-    const [cardname, setCardname] = useState('')
-    const [cardnumber, setCardnumber] = useState('')
-    const [expDate, setExpDate] = useState('')
+    const [cardname, setCardname] = useState(props.user.cardName)
+    const [cardnumber, setCardnumber] = useState(props.user.cardNumber)
+    const [expDate, setExpDate] = useState(props.user.expDate)
+
+    const submitform = (e) =>{
+        e.preventDefault()
+        const userId = localStorage.getItem('userId')
+
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,{
+            cardName: cardname,
+            cardNumber: cardnumber,
+            expDate: expDate
+        })
+        .then((response) =>{
+            console.log(response)
+        })
+    }
 
     return(
         <div>
@@ -36,7 +51,7 @@ const Userwallet = (props) =>{
 
                 page === 'secondpage' ?
 
-                <form>
+                <form onSubmit = {submitform}>
 
                     <div className = 'input'>      
                         <input placeholder = 'card Name'  value = {cardname} onChange = {(e) =>(setCardname(e.target.value))}/>

@@ -1,17 +1,43 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+
 
 const Cart = (props) =>{
 
+    const [cart, setCart]= useState(props.cart)
+    console.log("CART AT BEGINING: ", cart )
+    
+    const getuserCart= async () =>{
+  
+        const cartId = localStorage.getItem('cartId')
+       try {
+         const cart = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products`)
+         console.log(cart)
+          if(cart.data.products){
+           setCart(cart.data.products)
+           console.log("CART AT getcart: ", cart )
+
+         }
+       }  catch(error){
+         console.log(error)
+       }
+     }
+
     const removeitem = (cartId, productId) =>{
 
-        axios.delete (`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products/${productId}`).then((response) =>{
+        axios.delete (`${process.env.REACT_APP_BACKEND_URL}/carts/${cartId}/products/${productId}`)
+        .then((response) =>{
             console.log(response)
+            console.log("CART AT Removeitem: ", cart )
+
+            // window.location.reload()
+            
         })
 
     }
-    // useEffect(removeitem, [props.cart])
+    useEffect(removeitem, [cart])
 
 
     
@@ -20,7 +46,7 @@ const Cart = (props) =>{
 
         <div className = 'cartpage'>
             {
-                props.cart.map((item, i) =>(
+                cart.map((item, i) =>(
                     <div className = 'cartproduct' key = {i}>
 
                         <h4>{item.name}</h4>
@@ -28,6 +54,7 @@ const Cart = (props) =>{
                         <img src = {`images/${item.image}`}/>
                         <button onClick = {() =>{
                         removeitem (item.cartItems.cartId, item.cartItems.productId)
+                        getuserCart()
                         }}>Remove Item</button>
                       <br/>
                       <br/>
